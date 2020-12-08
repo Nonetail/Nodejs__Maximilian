@@ -37,7 +37,8 @@ const requestHandler = (req, res) => {
 };
 
 
-// export a default value 
+// export a default value
+// instead of using object, we use a simple function here
 // module.exports = requestHandler;
 
 // module.exports = {
