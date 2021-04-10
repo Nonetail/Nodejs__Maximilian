@@ -7,24 +7,21 @@ const server = http.createServer((req, res) => {
   if (url === '/') {
     res.write('<html>');
     res.write('<head><title>Enter Message</title><head>');
-    // default form action will take all the input data, and put it into request body as key value pairs
-    // name attr as key(message), value as what user entered {message: 'some input'}
     res.write('<body><form action="/message" method="POST"><input type="text" name="message"><button type="submit">Send</button></form></body>');
     res.write('</html>');
     return res.end();
   }
   if (url === '/message' && method === 'POST') {
     const body = [];
-    // the incoming data is sent as a stream of data, we can listen on the data(built-in) event
-    // the 'data' event will be fired whenever a chunk of data is ready to be read
+    //NOTE: the incoming data is sent as a stream of data, we can listen on the data(built-in) event
+    //NOTE: the build-in 'data' event will be fired whenever a chunk of data is ready to be read
     req.on('data', (chunk) => {
       console.log(chunk);
       body.push(chunk);
     });
-    // 'end' event will be fired once we done parsing the incoming data
+    //NOTE: 'end' event will be fired once we done parsing the incoming data
     req.on('end', () => {
-      // Buffer object give us a way to interact with chunk data
-      // toString will only work because we know the incoming data would be text in this case
+      //GOOGLE: The chunk emitted in each 'data' event is a Buffer. If you know it's going to be string data, the best thing to do is collect the data in an array, then at the 'end', concatenate and stringify it.
       const parsedBody = Buffer.concat(body).toString();
       const message = parsedBody.split('=')[1];
       fs.writeFileSync('message.txt', message);

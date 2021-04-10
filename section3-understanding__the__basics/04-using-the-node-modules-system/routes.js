@@ -36,20 +36,19 @@ const requestHandler = (req, res) => {
   res.end();
 };
 
-
-// export a default value
-// instead of using object, we use a simple function here
+//NOTE: instead of using object, we can also use a simple function here
 // module.exports = requestHandler;
 
+//NOTE: object
 // module.exports = {
 //     handler: requestHandler,
 //     someText: 'Some hard coded text'
 // };
 
+//NOTE: object
 // module.exports.handler = requestHandler;
 // module.exports.someText = 'Some text';
 
-// exports here export functions and values individually
-// exports will export an object (destructuring), and handler and someText would be keys
+//NOTE: exports bottom are just shortcut in node.js which is equal to module.exports above
 exports.handler = requestHandler;
 exports.someText = 'Some hard coded text';
