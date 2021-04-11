@@ -10,6 +10,8 @@ const products = [];
 
 // /admin/add-product => GET
 router.get('/add-product', (req, res, next) => {
+  //NOTE: will use the template engine, and then return that template, file extension can be ignored
+  //NOTE: how to pass data(javascript object!) to the template
   res.render('add-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',

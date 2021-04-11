@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+//NOTE: app set can store key value in express instance (like global)
+//GOOGLE: 'view engine' is a reserved key word which tells express which view engine to set up
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
