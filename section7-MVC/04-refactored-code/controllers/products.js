@@ -1,6 +1,7 @@
+//NOTE: convention is to use captical char for classes
 const Product = require('../models/product');
 
-// seperate the controller logic from the routes
+//NOTE: seperate the controller logic from the routes, controller interact with model data, and returns rendered view
 
 exports.getAddProduct = (req, res, next) => {
   res.render('add-product', {

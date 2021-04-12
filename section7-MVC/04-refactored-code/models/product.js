@@ -2,15 +2,14 @@ const fs = require('fs');
 const path = require('path');
 
 const p = path.join(
-  // require.main.filename gets the file name(path) of the main module, dirname get the the folder (path) of that file
+  //NOTE: require.main.filename gets the file name(path) of the main module, dirname get the the folder (path) of that file
   path.dirname(process.mainModule.filename),
   'data',
   'products.json'
 );
 
-// cb stands for call back function 
 const getProductsFromFile = cb => {
-  // readFile is async, so use callback here
+  //NOTE: readFile is async, so use callback here
   fs.readFile(p, (err, fileContent) => {
     if (err) {
       cb([]);
@@ -20,6 +19,7 @@ const getProductsFromFile = cb => {
   });
 };
 
+//GOOGLE: try use more clas s as data structure
 module.exports = class Product {
   constructor(t) {
     this.title = t;
@@ -27,17 +27,18 @@ module.exports = class Product {
 
   save = () => {
     getProductsFromFile(products => {
-      // JSON is a text-based data format following JavaScript object syntax
+      //NOTE: JSON is a text-based data format following JavaScript object syntax
       // JSON exists as a string — useful when you want to transmit data across a network. 
       // It needs to be converted to a native JavaScript object when you want to access the data.
       // JSON is a string whose format very much resembles JavaScript object literal format.
+      products.push(this);
       fs.writeFile(p, JSON.stringify(products), err => {
         console.log(err);
       });
     });
   }
 
-  // static function can't be accessed in instance, can be accessed by Class
+  //NOTE: static function can't be accessed in instance, can be accessed by Class
   static fetchAll(cb) {
     getProductsFromFile(cb);
   }
